@@ -1,7 +1,11 @@
+/*
+메모리 개선을 위해
+LinkedList -> ArrayDeque로 변경
+* */
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
+import java.util.ArrayDeque;
 import java.util.Queue;
 
 public class Main {
@@ -10,7 +14,7 @@ public class Main {
         int N = Integer.parseInt(br.readLine());
 
         // 카드 준비
-        Queue<Integer> queue = new LinkedList<>();
+        Queue<Integer> queue = new ArrayDeque<>(N);
         for (int i = 1; i < N + 1; i++) {
             queue.add(i);
         }
