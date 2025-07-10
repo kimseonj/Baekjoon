@@ -1,3 +1,8 @@
+/*
+try - catch를  Character.isDigist()로 변경
+*/
+
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,10 +27,10 @@ public class Main {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < M; i++) {
             String input = br.readLine();
-            try {
+            if (Character.isDigit(input.charAt(0))) {
                 sb.append(pokemon[Integer.parseInt(input)]);
                 sb.append("\n");
-            } catch (NumberFormatException e) {
+            } else {
                 sb.append(map.get(input));
                 sb.append("\n");
             }
