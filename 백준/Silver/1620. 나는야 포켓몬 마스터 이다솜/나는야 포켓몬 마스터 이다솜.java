@@ -12,18 +12,18 @@ public class Main {
         int M = Integer.parseInt(str[1]);
 
         HashMap<String, Integer> map = new HashMap<>();
-        String[] pokemon = new String[N];
-        for (int i = 0; i < N; i++) {
+        String[] pokemon = new String[N + 1];
+        for (int i = 1; i <= N; i++) {
             String a = br.readLine();;
             pokemon[i] = a;
-            map.put(a, i + 1);
+            map.put(a, i);
         }
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < M; i++) {
             String input = br.readLine();
             try {
-                sb.append(pokemon[Integer.parseInt(input) - 1]);
+                sb.append(pokemon[Integer.parseInt(input)]);
                 sb.append("\n");
             } catch (NumberFormatException e) {
                 sb.append(map.get(input));
