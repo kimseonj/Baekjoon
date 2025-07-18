@@ -1,3 +1,5 @@
+// int[] 배열은 초기화 할 때 0으로 초기화된다.
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,12 +13,6 @@ public class Main {
 
         int[] arr = new int[N+1];
 
-        if (N == 0) {
-            System.out.println(0);
-            return;
-        }
-
-        arr[1] = 0;
         for (int i = 2; i <= N; i++) {
             arr[i] = arr[i-1] + 1;
             if (i % 3 == 0) arr[i] = Math.min(arr[i], arr[i/3] + 1);
