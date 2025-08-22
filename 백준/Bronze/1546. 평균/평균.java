@@ -1,24 +1,27 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.Arrays;
+import java.util.StringTokenizer;
 
+/**
+ * 평균
+ *
+ * 시간제한 2초
+ */
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        String[] arr = br.readLine().split(" ");
+        int N = Integer.parseInt(br.readLine());
 
-        double sum=0;
-        int max=0;
-        for (String s : arr) {
-            int i = Integer.parseInt(s);
-            sum += i;
-            if (i>max) {
-                max = i;
-            }
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        double max = 0;
+        double sum = 0;
+        for (int i = 0; i < N; i++) {
+            int score = Integer.parseInt(st.nextToken());
+            if (score > max) max = score;
+            sum += score;
         }
 
-        System.out.print(sum/max*100/n);
-
+        System.out.println(sum/max*100.0/N);
     }
 }
+
