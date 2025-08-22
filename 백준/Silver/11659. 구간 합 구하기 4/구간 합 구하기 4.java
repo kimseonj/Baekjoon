@@ -9,6 +9,8 @@ import java.util.StringTokenizer;
  * 시간제한 1초
  *
  * O(N^2)까지 나옴 -> 구간합 사용
+ * 
+ * 코드 가독성 개선
  */
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -19,29 +21,23 @@ public class Main {
         st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
+        int[] prefixSum = new int[N+1];
 
-        // 입력
-        int[] prefixSum = new int[N];
-
+        // 누적 합 계산
         st = new StringTokenizer(br.readLine());
-        int temp = 0;
-        for (int i = 0; i < N; i++) {
-            temp += Integer.parseInt(st.nextToken());
-            prefixSum[i] = temp;
+        for (int i = 1; i <= N; i++) {
+            prefixSum[i] = prefixSum[i-1] + Integer.parseInt(st.nextToken());
         }
 
-        // 문제
+        // 문제 해결
         for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
-            logic(prefixSum, Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
-        }
-    }
+            int start = Integer.parseInt(st.nextToken());
+            int end = Integer.parseInt(st.nextToken());
 
-    static void logic(int[] prefixSum, int start, int end) {
-        if (start == 1) {
-            System.out.println(prefixSum[end - 1]);
-        } else {
-            System.out.println(prefixSum[end - 1] - prefixSum[start - 2]);
+            int result = prefixSum[end] - prefixSum[start - 1];
+
+            System.out.println(result);
         }
     }
 }
