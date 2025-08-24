@@ -1,6 +1,5 @@
 import java.io.*;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /**
  * 주몽
@@ -9,6 +8,8 @@ import java.util.StringTokenizer;
  * 1 <= M <= 10,000,000
  *
  * 시간 제한 2초
+ *
+ * 정렬 + 투포인터 사용해보기
  */
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -18,29 +19,28 @@ public class Main {
 
         StringTokenizer st = new StringTokenizer(br.readLine());
         int[] arr = new int[N];
-        boolean[] visited = new boolean[N];
 
         for (int i = 0; i < N; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
+        Arrays.sort(arr);
+
         int start = 0;
-        int end = 0;
+        int end = N - 1;
 
-        int result = 0;
         int sum = 0;
-        loop1:
-        for (int i = 0; i < N - 1; i++) {
-            if (visited[i]) continue;
-
-            sum = arr[i];
-            for (int j = i + 1; j < N; j++) {
-                if (sum + arr[j] == M) {
-                    visited[i] = true;
-                    visited[j] = true;
-                    result++;
-                    continue loop1;
-                }
+        int result = 0;
+        while (start < end) {
+            sum = arr[start] + arr[end];
+            if (sum == M) {
+                result++;
+                start++;
+                end--;
+            } else if (sum > M) {
+                end--;
+            } else {
+                start++;
             }
         }
 
