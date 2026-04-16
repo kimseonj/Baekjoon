@@ -1,43 +1,37 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
+/** 
+ * 나이와 이름이 가입한 순서대로 주어진다.
+ * 
+ * 회원들을 나이가 증가하는 순 정렬
+ * 나이가 같으면 먼저 가입한 사람이 앞에 오는 순서로 정렬
+ * 
+ * 3초, N < 100,000명
+ */
+
 public class Main {
-    public static class Person {
-        int age;
-        String name;
-
-        public Person(int age, String name) {
-            this.age = age;
-            this.name = name;
-        }
-    }
-
     public static void main(String[] args) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(bufferedReader.readLine());
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        Person[] persons = new Person[N];
+        int N = Integer.parseInt(br.readLine());
+
+        String[][] arr = new String[N][2];
         for (int i = 0; i < N; i++) {
-            String[] s = bufferedReader.readLine().split(" ");
-            persons[i] = new Person(Integer.parseInt(s[0]), s[1]);
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            arr[i][0] = st.nextToken();
+            arr[i][1] = st.nextToken();
         }
 
-        Arrays.sort(persons, new Comparator<Person>() {
-            @Override
-            public int compare(Person o1, Person o2) {
-                if (o1.age > o2.age) {
-                    return 1;
-                } else if (o1.age < o2.age) {
-                    return -1;
-                }
-                return 0;
-            }
+        Arrays.sort(arr, (a, b) -> {
+            return Integer.compare(Integer.parseInt(a[0]), Integer.parseInt(b[0]));
         });
 
-        for (Person person : persons) {
-            System.out.println(person.age + " " + person.name);
+        StringBuilder sb = new StringBuilder();
+        for (String[] words : arr) {
+            sb.append(words[0]).append(" ")
+                .append(words[1]).append("\n");
         }
+        System.out.println(sb);
     }
 }
