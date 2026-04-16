@@ -1,39 +1,37 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Comparator;
+import java.io.*;
+import java.util.*;
+
+/** 
+ * 좌표를 y좌표가 증가하는 순으로, y좌표가 같으면 x좌표가 증가하는 순서로 정렬
+ * 1초
+ */
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         int N = Integer.parseInt(br.readLine());
 
-        int[][] planes = new int[N][2];
-        for (int[] plane : planes) {
-            String[] split = br.readLine().split(" ");
+        int[][] arrays = new int[N][2];
 
-            plane[0] = Integer.parseInt(split[0]);
-            plane[1] = Integer.parseInt(split[1]);
+        for (int i = 0; i < N; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            arrays[i][0] = Integer.parseInt(st.nextToken());
+            arrays[i][1] = Integer.parseInt(st.nextToken());
         }
-
-        Arrays.sort(planes, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                if (o1[1] == o2[1]) {
-                    return o1[0] - o2[0];
-                }
-                return o1[1] - o2[1];
+        
+        Arrays.sort(arrays, (a, b) -> {
+            if (a[1] == b[1]) {
+                return Integer.compare(a[0], b[0]);
             }
+            return Integer.compare(a[1], b[1]);
         });
 
         StringBuilder sb = new StringBuilder();
-        for (int[] plane : planes) {
-            sb.append(plane[0] + " " + plane[1] + "\n");
+        for (int[] arr : arrays) {
+            sb.append(arr[0]).append(" ")
+                .append(arr[1]).append("\n");
         }
-
         System.out.println(sb);
-
     }
-
 }
