@@ -1,28 +1,34 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Stack;
+import java.io.*;
+import java.util.*;
+
+/** 
+ * 
+ */
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         int N = Integer.parseInt(br.readLine());
 
-        Stack<Integer> stack = new Stack<>();
+        Deque<Integer> stack = new ArrayDeque<>();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < N; i++) {
-            int input = Integer.parseInt(br.readLine());
-            if (input == 0) {
+            int number = Integer.parseInt(br.readLine());
+
+            if (number == 0) {
                 stack.pop();
             } else {
-                stack.push(input);
+                stack.push(number);
             }
         }
 
-        int sum = 0;
-        for (Integer i : stack) {
-            sum += i;
+        int answer = 0;
+        for (int i : stack) {
+            answer += i;
         }
 
-        System.out.println(sum);
+        System.out.println(answer);
     }
+
 }
