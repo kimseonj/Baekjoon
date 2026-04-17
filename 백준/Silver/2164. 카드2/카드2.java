@@ -1,30 +1,26 @@
-/*
-메모리 개선을 위해
-LinkedList -> ArrayDeque로 변경
-* */
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.Queue;
+import java.io.*;
+import java.util.*;
+
+/** 
+ * 2초
+ */
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
 
-        // 카드 준비
-        Queue<Integer> queue = new ArrayDeque<>(N);
-        for (int i = 1; i < N + 1; i++) {
+        Deque<Integer> queue = new ArrayDeque<>();
+
+        for (int i = 1; i <= N; i++) {
             queue.add(i);
         }
 
-        while (queue.size() != 1) {
+        for (int i = 1; i < N; i++) {
             queue.poll();
             queue.add(queue.poll());
         }
 
         System.out.println(queue.poll());
-
     }
 }
